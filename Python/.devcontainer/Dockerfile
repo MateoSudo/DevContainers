@@ -114,13 +114,16 @@ RUN mkdir -p /workspace/projects \
     && mkdir -p /workspace/security-analysis \
     && chown -R $USERNAME:$USERNAME /workspace
 
-# Set up Jupyter configuration
+# Set up Jupyter configuration and VS Code server directories
 RUN mkdir -p /home/$USERNAME/.jupyter \
+    && mkdir -p /home/$USERNAME/.vscode-server/extensions \
+    && mkdir -p /home/$USERNAME/.vscode-server/data \
     && echo "c.NotebookApp.ip = '0.0.0.0'" >> /home/$USERNAME/.jupyter/jupyter_notebook_config.py \
     && echo "c.NotebookApp.port = 8888" >> /home/$USERNAME/.jupyter/jupyter_notebook_config.py \
     && echo "c.NotebookApp.open_browser = False" >> /home/$USERNAME/.jupyter/jupyter_notebook_config.py \
     && echo "c.NotebookApp.allow_root = True" >> /home/$USERNAME/.jupyter/jupyter_notebook_config.py \
-    && chown -R $USERNAME:$USERNAME /home/$USERNAME/.jupyter
+    && chown -R $USERNAME:$USERNAME /home/$USERNAME/.jupyter \
+    && chown -R $USERNAME:$USERNAME /home/$USERNAME/.vscode-server
 
 # Install additional development tools via pip for the user
 USER $USERNAME
