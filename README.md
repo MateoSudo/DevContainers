@@ -64,8 +64,24 @@ DevContainers/
 │   ├── data/                         # Data files and analysis outputs
 │   └── security-analysis/            # Cybersecurity analysis work
 │
+├── JavaScript/                       # Next.js T3 Stack development environment
+│   ├── .devcontainer/                # Next.js-specific container configuration
+│   │   ├── devcontainer.json        # VS Code dev container settings
+│   │   ├── Dockerfile               # Optimized Node.js container
+│   │   ├── docker-compose.yml       # Multi-service setup (PostgreSQL, Redis)
+│   │   └── .dockerignore            # Docker build exclusions
+│   ├── template/                     # Template for copying to existing repos
+│   │   ├── copy-to-existing-repo.sh # Automated copy script
+│   │   ├── package.json             # T3 stack dependencies
+│   │   ├── tsconfig.json            # TypeScript configuration
+│   │   ├── next.config.js           # Next.js configuration
+│   │   ├── tailwind.config.js       # Tailwind CSS setup
+│   │   ├── .eslintrc.json           # ESLint rules
+│   │   └── prisma/schema.prisma     # Database schema template
+│   ├── package.json                 # Project dependencies
+│   └── README.md                    # Next.js T3 stack documentation
+│
 └── [Future Language Directories]     # Additional languages will be added here
-    ├── JavaScript/
     ├── Java/
     ├── Go/
     └── ...
@@ -74,6 +90,10 @@ DevContainers/
 ## 🐍 Python Development Environment
 
 The Python dev container is a comprehensive setup for **Data Science** and **Cybersecurity** work.
+
+## ⚡ Next.js T3 Stack Development Environment
+
+The JavaScript dev container provides a complete **T3 Stack** setup - the best way to start a full-stack, typesafe Next.js app.
 
 ### Features
 
@@ -227,6 +247,9 @@ The `DevContainers.code-workspace` provides:
 
 Access via **Ctrl+Shift+P** → "Tasks: Run Task":
 - **🐍 Open Python Container**: Opens Python environment in new window
+- **⚡ Open Next.js T3 Container**: Opens Next.js T3 Stack environment in new window
+- **🔧 Build Python Container**: Rebuilds Python development container
+- **🔧 Build Next.js Container**: Rebuilds Next.js development container
 - **🔧 Build All Containers**: Rebuilds all development containers
 - **🧹 Clean Docker Resources**: Cleanup unused Docker resources
 
@@ -334,6 +357,49 @@ The Python container includes special capabilities for cybersecurity work:
 
 ---
 
+## ⚡ Next.js T3 Stack Features
+
+### Core T3 Stack
+- **Next.js 14** - React framework for production
+- **TypeScript** - Strongly typed programming language  
+- **tRPC** - End-to-end typesafe APIs
+- **Prisma** - Next-generation ORM
+- **NextAuth.js** - Complete authentication solution
+- **Tailwind CSS** - Utility-first CSS framework
+
+### Development Services
+- **Node.js 18 LTS** with pnpm, yarn, and npm support
+- **PostgreSQL 15** database with Adminer web interface
+- **Redis 7** for caching and sessions
+- **Optimized Docker** setup for fast rebuilds
+
+### Copy to Existing Repository
+Use the automated script to add T3 stack dev container to your existing project:
+
+```bash
+cd JavaScript/
+./template/copy-to-existing-repo.sh /path/to/your/existing/repo
+```
+
+The script intelligently:
+- ✅ Copies dev container configuration
+- ✅ Merges dependencies into existing package.json
+- ✅ Sets up TypeScript, ESLint, Prettier, and Tailwind
+- ✅ Configures VS Code settings and debug launch configurations
+- ✅ Provides step-by-step setup instructions
+
+### Quick Next.js Start
+```bash
+cd JavaScript/
+code .
+# Reopen in Container when prompted
+npm install
+cp template/env.example .env.local
+# Edit .env.local with your settings
+npx prisma db push
+npm run dev
+```
+
 **Happy Coding! 🎉**
 
-*This repository is designed to get you up and running quickly with a fully configured development environment. If you have suggestions or run into issues, please open an issue or contribute improvements.*
+*This repository is designed to get you up and running quickly with fully configured development environments. If you have suggestions or run into issues, please open an issue or contribute improvements.*

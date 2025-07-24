@@ -1,0 +1,152 @@
+{
+    "name": "Next.js T3 Stack Dev Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "nextjs-dev",
+    "workspaceFolder": "/workspace",
+    // Configure tool-specific properties
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // TypeScript settings
+                "typescript.preferences.preferences.includePackageJsonAutoImports": "on",
+                "typescript.suggest.autoImports": true,
+                "typescript.updateImportsOnFileMove.enabled": "always",
+                // ESLint and Prettier settings
+                "editor.formatOnSave": true,
+                "editor.defaultFormatter": "esbenp.prettier-vscode",
+                "editor.codeActionsOnSave": {
+                    "source.fixAll.eslint": "explicit",
+                    "source.organizeImports": "explicit"
+                },
+                // Next.js specific settings
+                "emmet.includeLanguages": {
+                    "javascript": "javascriptreact",
+                    "typescript": "typescriptreact"
+                },
+                // Tailwind CSS settings
+                "tailwindCSS.includeLanguages": {
+                    "typescript": "javascript",
+                    "typescriptreact": "javascript"
+                },
+                "tailwindCSS.experimental.classRegex": [
+                    [
+                        "cva\\(([^)]*)\\)",
+                        "[\"'`]([^\"'`]*).*?[\"'`]"
+                    ],
+                    [
+                        "cx\\(([^)]*)\\)",
+                        "(?:'|\"|`)([^']*)(?:'|\"|`)"
+                    ]
+                ],
+                // File associations
+                "files.associations": {
+                    "*.css": "tailwindcss",
+                    "*.env.local": "dotenv",
+                    "*.env.example": "dotenv"
+                },
+                // Auto-save and file watching
+                "files.autoSave": "onFocusChange",
+                "files.watcherExclude": {
+                    "**/.git/objects/**": true,
+                    "**/node_modules/**": true,
+                    "**/.next/**": true,
+                    "**/dist/**": true
+                }
+            },
+            // Essential extensions for Next.js T3 stack development
+            "extensions": [
+                // TypeScript & JavaScript
+                "ms-vscode.vscode-typescript-next",
+                "ms-vscode.vscode-js-debug",
+                // React & Next.js
+                "ms-vscode.vscode-react-refactor",
+                "burkeholland.simple-react-snippets",
+                "dsznajder.es7-react-js-snippets",
+                "formulahendry.auto-rename-tag",
+                // Code Quality & Formatting
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "bradlc.vscode-tailwindcss",
+                "styled-components.vscode-styled-components",
+                // Database & API
+                "prisma.prisma",
+                "ms-vscode.vscode-json",
+                "humao.rest-client",
+                // Git & GitHub
+                "github.copilot",
+                "github.copilot-chat",
+                "eamodio.gitlens",
+                "github.vscode-pull-request-github",
+                // Development Tools
+                "ms-vscode.vscode-npm-script",
+                "christian-kohler.npm-intellisense",
+                "christian-kohler.path-intellisense",
+                "bradlc.vscode-tailwindcss",
+                // Environment & Configuration
+                "mikestead.dotenv",
+                "ms-vscode.vscode-env",
+                // Documentation & Markdown
+                "yzhang.markdown-all-in-one",
+                "shd101wyy.markdown-preview-enhanced",
+                // Docker & DevOps
+                "ms-azuretools.vscode-docker",
+                "ms-vscode-remote.remote-containers",
+                // Utilities
+                "formulahendry.auto-close-tag",
+                "ms-vscode.vscode-thunder-client",
+                "usernamehw.errorlens",
+                "gruntfuggly.todo-tree"
+            ]
+        }
+    },
+    // Port forwarding for Next.js development
+    "forwardPorts": [
+        3000,
+        3001,
+        5432,
+        6379
+    ],
+    // Configure port labels
+    "portsAttributes": {
+        "3000": {
+            "label": "Next.js App",
+            "onAutoForward": "notify"
+        },
+        "3001": {
+            "label": "Storybook/Dev Server",
+            "onAutoForward": "notify"
+        },
+        "5432": {
+            "label": "PostgreSQL",
+            "onAutoForward": "silent"
+        },
+        "6379": {
+            "label": "Redis",
+            "onAutoForward": "silent"
+        }
+    },
+    // Commands to run after container creation
+    "postCreateCommand": "npm install && echo 'T3 Stack Dev Container Ready! 🚀'",
+    // Commands to run every time the container starts
+    "postStartCommand": "echo 'Welcome to your Next.js T3 Stack environment!'",
+    // Use non-root user
+    "remoteUser": "node",
+    // Environment variables
+    "containerEnv": {
+        "NODE_ENV": "development",
+        "NEXT_TELEMETRY_DISABLED": "1"
+    },
+    // Configure features
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    // Volume mounts for performance and persistence
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+        "source=nextjs-node-modules,target=/workspace/node_modules,type=volume",
+        "source=nextjs-npm-cache,target=/home/node/.npm,type=volume",
+        "source=nextjs-vscode-extensions,target=/home/node/.vscode-server/extensions,type=volume"
+    ]
+}

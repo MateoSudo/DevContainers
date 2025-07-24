@@ -7,11 +7,15 @@
     {
       "name": "🐍 Python Environment",
       "path": "./Python"
+    },
+    {
+      "name": "⚡ JavaScript/Next.js T3 Stack",
+      "path": "./JavaScript"
     }
     // Future language environments will be added here:
     // {
-    //   "name": "⚡ JavaScript Environment", 
-    //   "path": "./JavaScript"
+    //   "name": "☕ Java Environment",
+    //   "path": "./Java"
     // },
     // {
     //   "name": "☕ Java Environment",
@@ -22,7 +26,6 @@
     //   "path": "./Go"
     // }
   ],
-  
   "settings": {
     // Global workspace settings
     "files.exclude": {
@@ -33,7 +36,6 @@
       "**/__pycache__": true,
       "**/*.pyc": true
     },
-    
     // Default file associations
     "files.associations": {
       "*.devcontainer": "jsonc",
@@ -41,17 +43,14 @@
       "docker-compose*.yml": "yaml",
       "Dockerfile*": "dockerfile"
     },
-    
     // Editor settings
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
     },
-    
     // Git settings
     "git.autofetch": true,
     "git.enableSmartCommit": true,
-    
     // Dev container specific settings
     "remote.containers.defaultExtensions": [
       "ms-vscode.vscode-json",
@@ -61,29 +60,29 @@
       "github.copilot-chat"
     ]
   },
-  
   "extensions": {
     "recommendations": [
       // Essential extensions for multi-language development
       "ms-vscode-remote.remote-containers",
-      "ms-azuretools.vscode-docker", 
+      "ms-azuretools.vscode-docker",
       "eamodio.gitlens",
       "github.copilot",
       "github.copilot-chat",
       "ms-vscode.vscode-json",
       "redhat.vscode-yaml",
-      
       // Python specific (when working in Python folder)
       "ms-python.python",
       "ms-python.vscode-pylance",
       "ms-toolsai.jupyter",
-      
+      // JavaScript/TypeScript specific (when working in JavaScript folder)
+      "ms-vscode.vscode-typescript-next",
+      "bradlc.vscode-tailwindcss",
+      "prisma.prisma",
       // Markdown and documentation
       "yzhang.markdown-all-in-one",
       "shd101wyy.markdown-preview-enhanced"
     ]
   },
-  
   "tasks": {
     "version": "2.0.0",
     "tasks": [
@@ -91,7 +90,9 @@
         "label": "🐍 Open Python Container",
         "type": "shell",
         "command": "code",
-        "args": ["./Python"],
+        "args": [
+          "./Python"
+        ],
         "group": "build",
         "presentation": {
           "echo": true,
@@ -105,13 +106,61 @@
         "detail": "Open the Python development environment in a new window"
       },
       {
-        "label": "🔧 Build All Containers",
-        "type": "shell", 
+        "label": "⚡ Open Next.js T3 Container",
+        "type": "shell",
+        "command": "code",
+        "args": [
+          "./JavaScript"
+        ],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "detail": "Open the Next.js T3 Stack development environment in a new window"
+      },
+      {
+        "label": "🔧 Build Python Container",
+        "type": "shell",
         "command": "docker-compose",
-        "args": ["build"],
+        "args": [
+          "build"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder}/Python/.devcontainer"
+        },
+        "detail": "Build the Python development container"
+      },
+      {
+        "label": "🔧 Build Next.js Container",
+        "type": "shell",
+        "command": "docker-compose",
+        "args": [
+          "build"
+        ],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}/JavaScript/.devcontainer"
+        },
+        "detail": "Build the Next.js T3 Stack development container"
+      },
+      {
+        "label": "🔧 Build All Containers",
+        "type": "shell",
+        "command": "bash",
+        "args": [
+          "-c",
+          "cd Python/.devcontainer && docker-compose build && cd ../../JavaScript/.devcontainer && docker-compose build"
+        ],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}"
         },
         "detail": "Build all development containers"
       },
@@ -119,13 +168,16 @@
         "label": "🧹 Clean Docker Resources",
         "type": "shell",
         "command": "docker",
-        "args": ["system", "prune", "-f"],
+        "args": [
+          "system",
+          "prune",
+          "-f"
+        ],
         "group": "build",
         "detail": "Clean up unused Docker resources"
       }
     ]
   },
-  
   "launch": {
     "version": "0.2.0",
     "configurations": [
@@ -137,4 +189,4 @@
       }
     ]
   }
-} 
+}

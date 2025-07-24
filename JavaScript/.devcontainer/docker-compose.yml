@@ -1,0 +1,177 @@
+version: "3.8"
+
+services:
+  # Main Next.js T3 Stack development container
+  nextjs-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USERNAME: node
+        USER_UID: 1000
+        USER_GID: 1000
+
+    container_name: nextjs-t3-dev
+
+    # Keep container running
+    command: sleep infinity
+
+    # Environment variables
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/t3_dev?schema=public
+      - NEXTAUTH_SECRET=your-secret-key-change-in-production
+      - NEXTAUTH_URL=http://localhost:3000
+      - REDIS_URL=redis://redis:6379
+
+    # Port mappings
+    ports:
+      - "3000:3000" # Next.js development server
+      - "3001:3001" # Secondary dev server (Storybook, etc.)
+
+    # Volume mounts for code and caching
+    volumes:
+      # Mount workspace with optimized consistency
+      - ../..:/workspace:cached
+
+      # Use named volumes for node_modules to improve performance
+      - nextjs-node-modules:/workspace/node_modules
+
+      # Cache npm/pnpm data
+      - nextjs-npm-cache:/home/node/.npm
+      - nextjs-pnpm-cache:/home/node/.cache/pnpm
+
+      # Persist VS Code extensions
+      - nextjs-vscode-extensions:/home/node/.vscode-server/extensions
+
+      # Cache Next.js build
+      - nextjs-build-cache:/workspace/.next
+
+    # Working directory
+    working_dir: /workspace
+
+    # Network configuration
+    networks:
+      - t3-network
+
+    # Dependencies
+    depends_on:
+      - postgres
+      - redis
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "node", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL database for Prisma
+  postgres:
+    image: postgres:15-alpine
+    container_name: nextjs-postgres
+
+    environment:
+      POSTGRES_DB: t3_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      # Persist database data
+      - postgres-data:/var/lib/postgresql/data
+
+      # Optional: Add init scripts
+      # - ./init-scripts:/docker-entrypoint-initdb.d
+
+    networks:
+      - t3-network
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching and sessions
+  redis:
+    image: redis:7-alpine
+    container_name: nextjs-redis
+
+    command: redis-server --appendonly yes --requirepass password
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      # Persist Redis data
+      - redis-data:/data
+
+    networks:
+      - t3-network
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Optional: Adminer for database management
+  adminer:
+    image: adminer:latest
+    container_name: nextjs-adminer
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: dracula
+
+    networks:
+      - t3-network
+
+    depends_on:
+      - postgres
+
+    restart: unless-stopped
+
+    profiles:
+      - tools
+
+# Named volumes for data persistence and performance
+volumes:
+  # Application caches for performance
+  nextjs-node-modules:
+    driver: local
+  nextjs-npm-cache:
+    driver: local
+  nextjs-pnpm-cache:
+    driver: local
+  nextjs-build-cache:
+    driver: local
+  nextjs-vscode-extensions:
+    driver: local
+
+  # Database persistence
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+
+# Custom network for service communication
+networks:
+  t3-network:
+    driver: bridge
+    name: t3-development-network
