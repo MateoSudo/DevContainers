@@ -1,4 +1,5 @@
-version: "3.8"
+# Docker Compose file for Python Development Container
+# Note: version field is deprecated in modern docker-compose
 
 services:
   # Main Python development container with data science and cybersecurity tools

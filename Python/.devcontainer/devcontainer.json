@@ -3,7 +3,6 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "python-dev",
   "workspaceFolder": "/workspace",
-  
   // Configure tool-specific properties
   "customizations": {
     "vscode": {
@@ -25,7 +24,6 @@
           "**/.*": true
         }
       },
-      
       // Essential VSCode extensions for Python, Data Science, and Cybersecurity
       "extensions": [
         // Python Development
@@ -35,38 +33,31 @@
         "ms-python.black-formatter",
         "ms-python.isort",
         "ms-python.pylint",
-        
         // Jupyter & Data Science
         "ms-toolsai.jupyter",
         "ms-toolsai.jupyter-keymap",
         "ms-toolsai.jupyter-renderers",
         "ms-toolsai.vscode-jupyter-cell-tags",
         "ms-toolsai.vscode-jupyter-slideshow",
-        
         // GitHub Integration & AI
         "github.copilot",
         "github.copilot-chat",
         "eamodio.gitlens",
-        
         // Code Quality & Formatting
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-json",
         "redhat.vscode-yaml",
         "ms-python.autopep8",
-        
         // General Development
         "ms-vscode.vscode-typescript-next",
         "ms-vscode-remote.remote-containers",
         "ms-vscode-remote.remote-ssh",
         "ms-vscode-remote.remote-wsl",
-        
         // Documentation & Markdown
         "yzhang.markdown-all-in-one",
         "shd101wyy.markdown-preview-enhanced",
-        
         // Docker & Infrastructure
         "ms-azuretools.vscode-docker",
-        
         // Cybersecurity Specific
         "ms-vscode.hexdump",
         "davidanson.vscode-markdownlint",
@@ -74,10 +65,13 @@
       ]
     }
   },
-  
   // Use 'forwardPorts' to make a list of ports inside the container available locally
-  "forwardPorts": [8888, 8000, 5000, 3000],
-  
+  "forwardPorts": [
+    8888,
+    8000,
+    5000,
+    3000
+  ],
   // Configure port forwarding labels
   "portsAttributes": {
     "8888": {
@@ -89,34 +83,21 @@
       "onAutoForward": "notify"
     }
   },
-  
   // Use 'postCreateCommand' to run commands after the container is created
   "postCreateCommand": "pip install --user -r requirements.txt && echo 'Dev container setup complete!'",
-  
   // Use 'postStartCommand' to run commands every time the container starts
   "postStartCommand": "echo 'Welcome to your Python Data Science & Cybersecurity Dev Container!'",
-  
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
   "remoteUser": "vscode",
-  
   // Set container specific settings
   "containerEnv": {
     "PYTHONPATH": "/workspace",
     "JUPYTER_ENABLE_LAB": "yes"
   },
-  
   // Configure features to install additional tools
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
-    }
-  },
-  
+  // Note: Git, GitHub CLI, and Node are already installed in our custom Dockerfile
+  // "features": {},
   // Mount the workspace and configure bind mounts
-  "mounts": [
-    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-    "source=python-dev-extensions,target=/root/.vscode-server/extensions,type=volume"
-  ]
-} 
+  // Note: Workspace mounting is handled by docker-compose.yml
+  "mounts": []
+}
