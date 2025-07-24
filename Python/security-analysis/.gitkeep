@@ -1,0 +1,18 @@
+# Security Analysis Directory
+# 
+# This directory is for cybersecurity analysis work including:
+# - Security reports and findings
+# - Packet captures (.pcap files)
+# - Hash analysis results
+# - Vulnerability assessments
+# - Network scan results
+# - Log analysis outputs
+# 
+# ⚠️  SECURITY NOTE:
+# Be careful not to commit sensitive information such as:
+# - Real network configurations
+# - Actual vulnerability data
+# - Personal information
+# - Confidential security reports
+# 
+# Use this space for educational and authorized testing only. 

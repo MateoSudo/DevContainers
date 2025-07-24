@@ -1,0 +1,13 @@
+# This file ensures the data directory is tracked by Git
+# Place your data files, datasets, and analysis outputs here
+
+# Common data file types:
+# - CSV files (.csv)
+# - JSON files (.json)
+# - Excel files (.xlsx)
+# - Database files (.db, .sqlite)
+# - Image files (.png, .jpg, .gif)
+# - Text files (.txt)
+# - Pickle files (.pkl)
+
+# Note: Large data files should be managed with Git LFS or stored separately 
