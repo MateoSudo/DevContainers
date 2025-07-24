@@ -1,0 +1,50 @@
+{
+  "name": "DevContainers - Multi-Language Repository",
+  
+  // This is a root-level devcontainer configuration that provides
+  // easy access to different language environments
+  
+  // Default to Python environment when opening from root
+  "dockerComposeFile": "Python/.devcontainer/docker-compose.yml",
+  "service": "python-dev",
+  "workspaceFolder": "/workspace",
+  
+  // Alternative: You can also define multiple configurations
+  // Users can select which one to use via Command Palette:
+  // "Dev Containers: Reopen in Container" -> Select Configuration
+  
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.exclude": {
+          "**/node_modules": true,
+          "**/.git": true,
+          "**/.DS_Store": true,
+          "**/Thumbs.db": true
+        }
+      },
+      "extensions": [
+        // Root-level extensions for repository management
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode.vscode-json",
+        "eamodio.gitlens",
+        "github.copilot",
+        "github.copilot-chat"
+      ]
+    }
+  },
+  
+  // Forward ports for the default Python environment
+  "forwardPorts": [8888, 8000, 5000, 3000],
+  
+  // Post-create message
+  "postCreateCommand": "echo 'Welcome to DevContainers Repository! 🚀'",
+  
+  // Use the vscode user
+  "remoteUser": "vscode",
+  
+  // Mount the entire repository
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ]
+} 

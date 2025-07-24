@@ -1,0 +1,140 @@
+{
+  "folders": [
+    {
+      "name": "📁 Repository Root",
+      "path": "."
+    },
+    {
+      "name": "🐍 Python Environment",
+      "path": "./Python"
+    }
+    // Future language environments will be added here:
+    // {
+    //   "name": "⚡ JavaScript Environment", 
+    //   "path": "./JavaScript"
+    // },
+    // {
+    //   "name": "☕ Java Environment",
+    //   "path": "./Java"
+    // },
+    // {
+    //   "name": "🚀 Go Environment", 
+    //   "path": "./Go"
+    // }
+  ],
+  
+  "settings": {
+    // Global workspace settings
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/__pycache__": true,
+      "**/*.pyc": true
+    },
+    
+    // Default file associations
+    "files.associations": {
+      "*.devcontainer": "jsonc",
+      "devcontainer.json": "jsonc",
+      "docker-compose*.yml": "yaml",
+      "Dockerfile*": "dockerfile"
+    },
+    
+    // Editor settings
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    
+    // Git settings
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    
+    // Dev container specific settings
+    "remote.containers.defaultExtensions": [
+      "ms-vscode.vscode-json",
+      "ms-azuretools.vscode-docker",
+      "eamodio.gitlens",
+      "github.copilot",
+      "github.copilot-chat"
+    ]
+  },
+  
+  "extensions": {
+    "recommendations": [
+      // Essential extensions for multi-language development
+      "ms-vscode-remote.remote-containers",
+      "ms-azuretools.vscode-docker", 
+      "eamodio.gitlens",
+      "github.copilot",
+      "github.copilot-chat",
+      "ms-vscode.vscode-json",
+      "redhat.vscode-yaml",
+      
+      // Python specific (when working in Python folder)
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-toolsai.jupyter",
+      
+      // Markdown and documentation
+      "yzhang.markdown-all-in-one",
+      "shd101wyy.markdown-preview-enhanced"
+    ]
+  },
+  
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🐍 Open Python Container",
+        "type": "shell",
+        "command": "code",
+        "args": ["./Python"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "detail": "Open the Python development environment in a new window"
+      },
+      {
+        "label": "🔧 Build All Containers",
+        "type": "shell", 
+        "command": "docker-compose",
+        "args": ["build"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}/Python/.devcontainer"
+        },
+        "detail": "Build all development containers"
+      },
+      {
+        "label": "🧹 Clean Docker Resources",
+        "type": "shell",
+        "command": "docker",
+        "args": ["system", "prune", "-f"],
+        "group": "build",
+        "detail": "Clean up unused Docker resources"
+      }
+    ]
+  },
+  
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "📝 Edit Repository Documentation",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/README.md"
+      }
+    ]
+  }
+} 

@@ -1,0 +1,95 @@
+{
+  // VS Code settings for DevContainers repository root
+  
+  // File exclusions for better performance
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/venv": true,
+    "**/.venv": true
+  },
+  
+  // File associations for dev container files
+  "files.associations": {
+    "*.devcontainer": "jsonc",
+    "devcontainer.json": "jsonc",
+    "docker-compose*.yml": "yaml",
+    "Dockerfile*": "dockerfile",
+    ".copilot-instructions.md": "markdown"
+  },
+  
+  // Editor settings
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+  
+  // Git settings
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  
+  // Dev Containers specific settings
+  "remote.containers.logLevel": "info",
+  "remote.containers.defaultExtensions": [
+    "ms-vscode.vscode-json",
+    "ms-azuretools.vscode-docker",
+    "eamodio.gitlens",
+    "github.copilot"
+  ],
+  
+  // Docker settings
+  "docker.defaultRegistryPath": "",
+  
+  // JSON formatting
+  "json.format.enable": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  
+  // YAML formatting  
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  
+  // Markdown settings
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.wordWrap": "on"
+  },
+  
+  // Python settings (when Python files are in root)
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  
+  // Search settings
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/.devcontainer": false,
+    "**/requirements.txt": false
+  },
+  
+  // Workspace trust
+  "security.workspace.trust.untrustedFiles": "open",
+  
+  // Terminal settings
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/bin/bash",
+      "icon": "terminal-bash"
+    }
+  }
+} 

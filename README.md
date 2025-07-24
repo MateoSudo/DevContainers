@@ -4,22 +4,37 @@ A comprehensive collection of development container templates for various progra
 
 ## 🚀 Quick Start
 
+### Option 1: Multi-Language Workspace (Recommended)
 1. **Clone this repository**:
    ```bash
    git clone <your-repo-url>
    cd DevContainers
    ```
 
-2. **Open in VS Code**:
-   - Install the "Dev Containers" extension in VS Code
-   - Open the desired language directory (e.g., `Python/`)
-   - VS Code will detect the dev container configuration
-   - Click "Reopen in Container" when prompted
+2. **Open the workspace file**:
+   ```bash
+   code DevContainers.code-workspace
+   ```
+   This gives you access to all language environments with easy switching.
 
-3. **Start developing**:
-   - All dependencies and tools will be automatically installed
-   - Extensions will be pre-configured
-   - Your development environment is ready!
+### Option 2: Root-Level Container
+1. **Open repository root in VS Code**:
+   ```bash
+   code .
+   ```
+2. **Reopen in Container** when prompted (defaults to Python environment)
+
+### Option 3: Individual Language Environment
+1. **Navigate to specific language directory**:
+   ```bash
+   cd Python/  # or any other language directory
+   code .
+   ```
+2. **Reopen in Container** when prompted
+
+### Quick Access Tasks
+- **Ctrl+Shift+P** → "Tasks: Run Task" → "🐍 Open Python Container"
+- **Ctrl+Shift+P** → "Dev Containers: Reopen in Container"
 
 ## 📁 Repository Structure
 
@@ -27,20 +42,29 @@ A comprehensive collection of development container templates for various progra
 DevContainers/
 ├── README.md                          # This file - main documentation
 ├── .copilot-instructions.md            # AI assistant context and instructions
+├── DevContainers.code-workspace       # VS Code workspace for multi-language development
 │
-├── Python/                             # Python development environment
-│   ├── .devcontainer/                  # Dev container configuration
-│   │   ├── devcontainer.json          # VS Code dev container settings
-│   │   ├── Dockerfile                 # Container image definition
-│   │   └── docker-compose.yml         # Container orchestration
-│   ├── requirements.txt               # Python dependencies
-│   ├── projects/                      # Your Python projects go here
-│   ├── notebooks/                     # Jupyter notebooks
-│   ├── data/                          # Data files
-│   ├── scripts/                       # Utility scripts
-│   └── security-analysis/             # Cybersecurity analysis work
+├── .devcontainer/                     # Root-level dev container configuration
+│   └── devcontainer.json             # Multi-language container settings
+├── .vscode/                           # Repository-wide VS Code settings
+│   └── settings.json                 # Editor configuration and dev container settings
 │
-└── [Future Language Directories]      # Additional languages will be added here
+├── Python/                            # Python development environment
+│   ├── .devcontainer/                 # Python-specific container configuration
+│   │   ├── devcontainer.json         # VS Code dev container settings
+│   │   ├── Dockerfile                # Container image definition
+│   │   └── docker-compose.yml        # Container orchestration
+│   ├── requirements.txt              # Python dependencies
+│   ├── projects/                     # Your Python projects go here
+│   ├── notebooks/                    # Jupyter notebooks
+│   │   └── welcome.ipynb             # Demo notebook with examples
+│   ├── scripts/                      # Example and utility scripts
+│   │   ├── data_analysis_example.py  # Data science demo script
+│   │   └── cybersecurity_example.py  # Security analysis demo script
+│   ├── data/                         # Data files and analysis outputs
+│   └── security-analysis/            # Cybersecurity analysis work
+│
+└── [Future Language Directories]     # Additional languages will be added here
     ├── JavaScript/
     ├── Java/
     ├── Go/
@@ -166,6 +190,45 @@ The containers are optimized for performance:
 - **Layer caching**: Docker layers are optimized for rebuild speed
 - **Extension persistence**: VS Code extensions don't re-download
 - **Pip caching**: Python packages cache for faster installs
+
+## 🔧 Working with Multiple Containers
+
+### Three Ways to Use This Repository
+
+#### 1. **VS Code Workspace (Best for Multi-Language Development)**
+Open `DevContainers.code-workspace` to work with multiple language environments:
+- See all language directories in one workspace
+- Easy switching between environments
+- Pre-configured tasks for container management
+- Consistent settings across all languages
+
+#### 2. **Root-Level Container (Quick Python Access)**
+Open the repository root and use the default container:
+- Automatically opens Python environment
+- Good for quick Python development
+- Access to all repository files
+
+#### 3. **Individual Language Containers (Focused Development)**
+Navigate to specific language directories:
+- Optimized for single-language development  
+- Language-specific extensions and settings
+- Isolated environments
+
+### VS Code Workspace Features
+
+The `DevContainers.code-workspace` provides:
+- **📁 Organized folder structure** with emojis for easy identification
+- **⚡ Quick tasks** to open specific containers
+- **🔧 Build commands** for all containers
+- **📝 Consistent settings** across all environments
+- **🎯 Extension recommendations** for each language
+
+### Container Management Tasks
+
+Access via **Ctrl+Shift+P** → "Tasks: Run Task":
+- **🐍 Open Python Container**: Opens Python environment in new window
+- **🔧 Build All Containers**: Rebuilds all development containers
+- **🧹 Clean Docker Resources**: Cleanup unused Docker resources
 
 ## 🚀 Advanced Usage
 
