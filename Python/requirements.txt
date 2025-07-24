@@ -55,7 +55,7 @@ dpkt>=1.9.8,<2.0.0                 # Fast packet parsing
 # Cryptography and Security
 cryptography>=41.0.0,<42.0.0       # Modern cryptographic recipes
 pycryptodome>=3.18.0,<4.0.0        # Cryptographic library
-hashlib                            # Built-in hashing (included with Python)
+# hashlib                          # Built-in hashing (included with Python) - not installable via pip
 
 # File Analysis and Forensics
 python-magic>=0.4.27,<1.0.0        # File type identification
@@ -100,7 +100,7 @@ pyyaml>=6.0.0,<7.0.0               # YAML parser and emitter
 toml>=0.10.2,<1.0.0                # TOML parser
 
 # Data Serialization
-pickle5>=0.0.12,<1.0.0             # Protocol 5 pickle backport (Python < 3.8)
+# pickle5>=0.0.12,<1.0.0           # Protocol 5 pickle backport (not needed for Python 3.11+)
 joblib>=1.2.0,<2.0.0               # Efficient serialization
 dill>=0.3.6,<1.0.0                 # Extended pickling capabilities
 

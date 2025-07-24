@@ -34,7 +34,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Database tools
     sqlite3 \
     postgresql-client \
-    mysql-client \
+    default-mysql-client \
     # Media and graphics libraries (for data visualization)
     libgl1-mesa-glx \
     libglib2.0-0 \
@@ -47,8 +47,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     binwalk \
     exiftool \
     file \
-    strings \
-    hexdump \
+    binutils \
+    bsdutils \
     # Python development dependencies
     python3-dev \
     python3-pip \
@@ -64,7 +64,6 @@ RUN pip install --no-cache-dir \
     scapy \
     pycryptodome \
     cryptography \
-    hashlib \
     requests \
     beautifulsoup4 \
     # Network analysis
@@ -88,12 +87,12 @@ ARG USER_GID=$USER_UID
 
 # Ensure the user exists and has proper permissions
 RUN if ! id -u $USERNAME > /dev/null 2>&1; then \
-        groupadd --gid $USER_GID $USERNAME \
-        && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-        && apt-get update \
-        && apt-get install -y sudo \
-        && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-        && chmod 0440 /etc/sudoers.d/$USERNAME; \
+    groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && apt-get update \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME; \
     fi
 
 # Set up workspace directory

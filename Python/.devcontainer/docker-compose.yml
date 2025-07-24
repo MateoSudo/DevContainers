@@ -1,75 +1,75 @@
-version: '3.8'
+version: "3.8"
 
 services:
   # Main Python development container with data science and cybersecurity tools
   python-dev:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
       args:
         # Build arguments for user configuration
         USERNAME: vscode
         USER_UID: 1000
         USER_GID: 1000
-    
+
     # Container name
     container_name: python-dev-container
-    
+
     # Keep container running
     command: sleep infinity
-    
+
     # Environment variables
     environment:
       - PYTHONPATH=/workspace
       - JUPYTER_ENABLE_LAB=yes
       - DISPLAY=${DISPLAY}
-    
+
     # Port mappings for common development services
     ports:
-      - "8888:8888"  # Jupyter Lab/Notebook
-      - "8000:8000"  # Development server
-      - "5000:5000"  # Flask default
-      - "3000:3000"  # React/Node default
-    
+      - "8888:8888" # Jupyter Lab/Notebook
+      - "8000:8000" # Development server
+      - "5000:5000" # Flask default
+      - "3000:3000" # React/Node default
+
     # Volume mounts for persistent data and code
     volumes:
       # Mount the entire workspace
       - ../..:/workspace:cached
-      
+
       # Persist pip cache for faster rebuilds
       - python-pip-cache:/home/vscode/.cache/pip
-      
+
       # Persist VS Code extensions
       - vscode-extensions:/home/vscode/.vscode-server/extensions
-      
+
       # Persist Jupyter settings
       - jupyter-config:/home/vscode/.jupyter
-      
+
       # Persist bash history
       - bash-history:/home/vscode/.bash_history
-      
+
       # X11 forwarding for GUI applications (optional)
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-    
+
     # Network configuration
     network_mode: "bridge"
-    
+
     # Security and capabilities
     cap_add:
       # Required for network analysis tools like tshark
       - NET_ADMIN
       - NET_RAW
-    
+
     # Privileged mode (needed for some cybersecurity tools)
     # Comment this out if you don't need elevated privileges
     privileged: false
-    
+
     # Working directory inside the container
     working_dir: /workspace
-    
+
     # Restart policy
     restart: unless-stopped
-    
+
     # Health check
     healthcheck:
       test: ["CMD", "python3", "--version"]
@@ -82,20 +82,19 @@ volumes:
   # Persist pip cache to speed up package installations
   python-pip-cache:
     driver: local
-  
+
   # Persist VS Code extensions to avoid re-downloading
   vscode-extensions:
     driver: local
-  
+
   # Persist Jupyter configuration
   jupyter-config:
     driver: local
-  
+
   # Persist bash history for convenience
   bash-history:
     driver: local
-
 # Optional: Define a custom network (uncomment if needed)
 # networks:
 #   dev-network:
-#     driver: bridge 
+#     driver: bridge
