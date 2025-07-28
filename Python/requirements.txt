@@ -129,6 +129,13 @@ dill>=0.3.6,<1.0.0                 # Extended pickling capabilities
 # pmdarima>=2.0.3,<3.0.0           # ARIMA modeling
 
 # =============================================================================
+# GITEA-GITHUB SYNC DEPENDENCIES
+# =============================================================================
+# Dependencies for bidirectional sync between Gitea and GitHub repositories
+requests>=2.31.0          # HTTP library for API calls
+PyYAML>=6.0.1             # YAML configuration file support
+
+# =============================================================================
 # PACKAGE COMPATIBILITY NOTES
 # =============================================================================
 # 

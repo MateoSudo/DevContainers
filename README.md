@@ -188,6 +188,25 @@ import magic
 file_type = magic.from_file('suspicious_file.exe')
 ```
 
+### 🔄 Repository Synchronization
+
+Both Python and JavaScript containers include **Gitea-GitHub bidirectional sync scripts** for keeping repositories synchronized:
+
+```bash
+# Initialize sync configuration
+./scripts/gitea-github-sync.sh --init
+python3 scripts/gitea_github_sync.py --help
+
+# Sync repositories
+./scripts/gitea-github-sync.sh --repo myorg/myrepo
+node scripts/gitea-github-sync.js --continuous
+
+# Available in both containers:
+# - Python: Advanced sync with full API support
+# - JavaScript: Modern Node.js implementation  
+# - Shell: Universal compatibility script
+```
+
 ## 🔧 Customization
 
 ### Adding New Packages
