@@ -4,7 +4,36 @@ A comprehensive collection of development container templates for various progra
 
 ## 🚀 Quick Start
 
-### Option 1: Multi-Language Workspace (Recommended)
+### Option 1: Setup Script (Recommended)
+Use the unified setup script to create development environments in any repository:
+
+```bash
+# Setup Python dev container
+./setup-env.sh -p devcontainer /path/to/your/project
+
+# Setup Python virtual environment
+./setup-env.sh -p venv /path/to/your/project
+
+# Setup Java dev container
+./setup-env.sh -j devcontainer /path/to/your/project
+
+# Setup Java local environment
+./setup-env.sh -j local /path/to/your/project
+
+# Setup JavaScript/Next.js dev container
+./setup-env.sh -s devcontainer /path/to/your/project
+
+# Setup JavaScript/Next.js local environment
+./setup-env.sh -s local /path/to/your/project
+
+# Setup all dev containers
+./setup-env.sh -a devcontainer /path/to/your/project
+
+# Setup mixed environments (Python venv + Java/JS local)
+./setup-env.sh -a venv /path/to/your/project
+```
+
+### Option 2: Multi-Language Workspace
 1. **Clone this repository**:
    ```bash
    git clone <your-repo-url>
@@ -17,14 +46,14 @@ A comprehensive collection of development container templates for various progra
    ```
    This gives you access to all language environments with easy switching.
 
-### Option 2: Root-Level Container
+### Option 3: Root-Level Container
 1. **Open repository root in VS Code**:
    ```bash
    code .
    ```
 2. **Reopen in Container** when prompted (defaults to Python environment)
 
-### Option 3: Individual Language Environment
+### Option 4: Individual Language Environment
 1. **Navigate to specific language directory**:
    ```bash
    cd Python/  # or any other language directory
@@ -34,6 +63,8 @@ A comprehensive collection of development container templates for various progra
 
 ### Quick Access Tasks
 - **Ctrl+Shift+P** → "Tasks: Run Task" → "🐍 Open Python Container"
+- **Ctrl+Shift+P** → "Tasks: Run Task" → "☕ Open Java Container"
+- **Ctrl+Shift+P** → "Tasks: Run Task" → "⚡ Open Next.js T3 Container"
 - **Ctrl+Shift+P** → "Dev Containers: Reopen in Container"
 
 ## 📁 Repository Structure
@@ -64,22 +95,34 @@ DevContainers/
 │   ├── data/                         # Data files and analysis outputs
 │   └── security-analysis/            # Cybersecurity analysis work
 │
-├── JavaScript/                       # Next.js T3 Stack development environment
-│   ├── .devcontainer/                # Next.js-specific container configuration
-│   │   ├── devcontainer.json        # VS Code dev container settings
-│   │   ├── Dockerfile               # Optimized Node.js container
-│   │   ├── docker-compose.yml       # Multi-service setup (PostgreSQL, Redis)
-│   │   └── .dockerignore            # Docker build exclusions
-│   ├── template/                     # Template for copying to existing repos
+├── Java/                            # Java JDK 21 FX development environment
+│   ├── .devcontainer/               # Java-specific container configuration
+│   │   ├── devcontainer.json       # VS Code dev container settings
+│   │   ├── Dockerfile              # OpenJDK 21 with JavaFX container
+│   │   └── docker-compose.yml      # Container orchestration
+│   ├── .vscode/                    # Java-specific VS Code settings
+│   │   └── settings.json           # Java development configuration
+│   ├── src/main/java/com/example/  # Sample JavaFX application
+│   │   └── App.java                # Main application class
+│   ├── pom.xml                     # Maven configuration with JavaFX
+│   └── README.md                   # Java development documentation
+│
+├── JavaScript/                      # Next.js T3 Stack development environment
+│   ├── .devcontainer/               # Next.js-specific container configuration
+│   │   ├── devcontainer.json       # VS Code dev container settings
+│   │   ├── Dockerfile              # Optimized Node.js container
+│   │   ├── docker-compose.yml      # Multi-service setup (PostgreSQL, Redis)
+│   │   └── .dockerignore           # Docker build exclusions
+│   ├── template/                    # Template for copying to existing repos
 │   │   ├── copy-to-existing-repo.sh # Automated copy script
-│   │   ├── package.json             # T3 stack dependencies
-│   │   ├── tsconfig.json            # TypeScript configuration
-│   │   ├── next.config.js           # Next.js configuration
-│   │   ├── tailwind.config.js       # Tailwind CSS setup
-│   │   ├── .eslintrc.json           # ESLint rules
-│   │   └── prisma/schema.prisma     # Database schema template
-│   ├── package.json                 # Project dependencies
-│   └── README.md                    # Next.js T3 stack documentation
+│   │   ├── package.json            # T3 stack dependencies
+│   │   ├── tsconfig.json           # TypeScript configuration
+│   │   ├── next.config.js          # Next.js configuration
+│   │   ├── tailwind.config.js      # Tailwind CSS setup
+│   │   ├── .eslintrc.json          # ESLint rules
+│   │   └── prisma/schema.prisma    # Database schema template
+│   ├── package.json                # Project dependencies
+│   └── README.md                   # Next.js T3 stack documentation
 │
 └── [Future Language Directories]     # Additional languages will be added here
     ├── Java/
@@ -90,6 +133,34 @@ DevContainers/
 ## 🐍 Python Development Environment
 
 The Python dev container is a comprehensive setup for **Data Science** and **Cybersecurity** work.
+
+## ☕ Java JDK 21 FX Development Environment
+
+The Java dev container provides a complete **JavaFX** development environment with OpenJDK 21, Maven, and comprehensive tooling for desktop application development.
+
+### Features
+
+#### 🎨 JavaFX Development
+- **OpenJDK 21**: Latest LTS version with modern Java features
+- **JavaFX 21.0.2**: Complete GUI framework for desktop applications
+- **Maven 3.9.6**: Build tool and dependency management
+- **Gradle 8.5**: Alternative build system
+- **JUnit 5**: Modern testing framework with TestFX for JavaFX testing
+
+#### 🛠️ Development Tools
+- **VS Code Java Extensions**: Complete Java development support
+- **Code Quality**: Google Style formatting, linting, and code analysis
+- **Debugging**: Hot code replace, breakpoint debugging
+- **Testing**: Integrated test runner with JavaFX support
+
+#### 📦 Pre-configured Dependencies
+- **JavaFX**: Controls, FXML, Web, Media, Graphics
+- **Testing**: JUnit 5, TestFX, Hamcrest
+- **Logging**: SLF4J, Logback
+- **JSON**: Jackson for data processing
+- **HTTP**: OkHttp client
+- **Database**: PostgreSQL, MySQL connectors
+- **Utilities**: Apache Commons, Commons IO
 
 ## ⚡ Next.js T3 Stack Development Environment
 

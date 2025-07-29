@@ -1,0 +1,141 @@
+{
+    "name": "Java JDK 21 FX Dev Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "java-dev",
+    "workspaceFolder": "/workspace",
+    // Configure tool-specific properties
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "java.home": "/usr/lib/jvm/java-21-openjdk-amd64",
+                "java.configuration.updateBuildConfiguration": "automatic",
+                "java.compile.nullAnalysis.mode": "automatic",
+                "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                "java.format.settings.profile": "GoogleStyle",
+                "java.saveActions.organizeImports": true,
+                "java.cleanup.actionsOnSave": [
+                    "qualifyStaticMembers",
+                    "qualifyMembers",
+                    "addOverride",
+                    "addDeprecated",
+                    "stringConcatenation",
+                    "unnecessaryThis",
+                    "unnecessaryNlsTag",
+                    "unnecessaryCast",
+                    "unnecessarySemicolon",
+                    "removeTrailingWhitespace",
+                    "insertInferredTypeArguments",
+                    "insertMissingOverrideAnnotation",
+                    "insertMissingDeprecatedAnnotation"
+                ],
+                "java.project.sourcePaths": [
+                    "src/main/java"
+                ],
+                "java.project.outputPath": "target/classes",
+                "java.project.referencedLibraries": [
+                    "lib/**/*.jar",
+                    "target/dependency/*.jar"
+                ],
+                "java.maven.downloadSources": true,
+                "java.maven.downloadJavadoc": true,
+                "java.debug.settings.hotCodeReplace": "auto",
+                "java.test.config": {
+                    "vmargs": [
+                        "-Djava.awt.headless=true",
+                        "-Dtestfx.robot=awt",
+                        "-Dtestfx.headless=true",
+                        "-Dprism.order=sw"
+                    ]
+                },
+                "files.watcherExclude": {
+                    "**/target/**": true,
+                    "**/.git/**": true,
+                    "**/node_modules/**": true
+                },
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "explicit"
+                },
+                "files.associations": {
+                    "*.fxml": "xml",
+                    "*.css": "css"
+                }
+            },
+            // Essential VSCode extensions for Java and JavaFX development
+            "extensions": [
+                // Java Development
+                "vscjava.vscode-java-pack",
+                "vscjava.vscode-java-debug",
+                "vscjava.vscode-java-test",
+                "vscjava.vscode-java-dependency",
+                "vscjava.vscode-maven",
+                "vscjava.vscode-java-snippets",
+                // JavaFX Support
+                "redhat.java",
+                "redhat.vscode-xml",
+                "redhat.vscode-yaml",
+                // Code Quality & Formatting
+                "esbenp.prettier-vscode",
+                "ms-vscode.vscode-json",
+                "ms-vscode.vscode-typescript-next",
+                // Git & AI
+                "eamodio.gitlens",
+                "github.copilot",
+                "github.copilot-chat",
+                // Documentation
+                "yzhang.markdown-all-in-one",
+                "shd101wyy.markdown-preview-enhanced",
+                // Docker & Infrastructure
+                "ms-azuretools.vscode-docker",
+                "ms-vscode-remote.remote-containers",
+                "ms-vscode-remote.remote-ssh",
+                "ms-vscode-remote.remote-wsl",
+                // General Development
+                "ms-vscode.hexdump",
+                "davidanson.vscode-markdownlint",
+                "usernamehw.errorlens",
+                "gruntfuggly.todo-tree",
+                "streetsidesoftware.code-spell-checker",
+                "ms-vscode.vscode-npm-script",
+                "christian-kohler.npm-intellisense",
+                "christian-kohler.path-intellisense",
+                "mikestead.dotenv",
+                "ms-vscode.vscode-env"
+            ]
+        }
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally
+    "forwardPorts": [
+        8080,
+        3000,
+        5000,
+        8000
+    ],
+    // Configure port forwarding labels
+    "portsAttributes": {
+        "8080": {
+            "label": "Java Application",
+            "onAutoForward": "notify"
+        },
+        "3000": {
+            "label": "Development Server",
+            "onAutoForward": "notify"
+        }
+    },
+    // Use 'postCreateCommand' to run commands after the container is created
+    "postCreateCommand": "mvn dependency:resolve && echo 'Java Dev Container Ready! 🚀'",
+    // Use 'postStartCommand' to run commands every time the container starts
+    "postStartCommand": "echo 'Welcome to your Java JDK 21 FX Development Environment!'",
+    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
+    "remoteUser": "vscode",
+    // Set container specific settings
+    "containerEnv": {
+        "JAVA_HOME": "/usr/lib/jvm/java-21-openjdk-amd64",
+        "MAVEN_HOME": "/usr/share/maven",
+        "PATH": "/usr/lib/jvm/java-21-openjdk-amd64/bin:/usr/share/maven/bin:${containerEnv:PATH}",
+        "DISPLAY": ":1"
+    },
+    // Mount the workspace and configure bind mounts
+    // Note: Workspace mounting is handled by docker-compose.yml
+    "mounts": []
+}

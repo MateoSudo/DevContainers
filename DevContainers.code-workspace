@@ -9,18 +9,14 @@
       "path": "./Python"
     },
     {
+      "name": "☕ Java JDK 21 FX Environment",
+      "path": "./Java"
+    },
+    {
       "name": "⚡ JavaScript/Next.js T3 Stack",
       "path": "./JavaScript"
     }
     // Future language environments will be added here:
-    // {
-    //   "name": "☕ Java Environment",
-    //   "path": "./Java"
-    // },
-    // {
-    //   "name": "☕ Java Environment",
-    //   "path": "./Java"
-    // },
     // {
     //   "name": "🚀 Go Environment", 
     //   "path": "./Go"
@@ -106,6 +102,25 @@
         "detail": "Open the Python development environment in a new window"
       },
       {
+        "label": "☕ Open Java Container",
+        "type": "shell",
+        "command": "code",
+        "args": [
+          "./Java"
+        ],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "detail": "Open the Java JDK 21 FX development environment in a new window"
+      },
+      {
         "label": "⚡ Open Next.js T3 Container",
         "type": "shell",
         "command": "code",
@@ -138,6 +153,19 @@
         "detail": "Build the Python development container"
       },
       {
+        "label": "🔧 Build Java Container",
+        "type": "shell",
+        "command": "docker-compose",
+        "args": [
+          "build"
+        ],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}/Java/.devcontainer"
+        },
+        "detail": "Build the Java JDK 21 FX development container"
+      },
+      {
         "label": "🔧 Build Next.js Container",
         "type": "shell",
         "command": "docker-compose",
@@ -156,7 +184,7 @@
         "command": "bash",
         "args": [
           "-c",
-          "cd Python/.devcontainer && docker-compose build && cd ../../JavaScript/.devcontainer && docker-compose build"
+          "cd Python/.devcontainer && docker-compose build && cd ../../Java/.devcontainer && docker-compose build && cd ../../JavaScript/.devcontainer && docker-compose build"
         ],
         "group": "build",
         "options": {

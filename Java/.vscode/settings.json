@@ -1,0 +1,55 @@
+{
+    "java.home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "java.format.settings.profile": "GoogleStyle",
+    "java.saveActions.organizeImports": true,
+    "java.cleanup.actionsOnSave": [
+        "qualifyStaticMembers",
+        "qualifyMembers",
+        "addOverride",
+        "addDeprecated",
+        "stringConcatenation",
+        "unnecessaryThis",
+        "unnecessaryNlsTag",
+        "unnecessaryCast",
+        "unnecessarySemicolon",
+        "removeTrailingWhitespace",
+        "insertInferredTypeArguments",
+        "insertMissingOverrideAnnotation",
+        "insertMissingDeprecatedAnnotation"
+    ],
+    "java.project.sourcePaths": [
+        "src/main/java"
+    ],
+    "java.project.outputPath": "target/classes",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "target/dependency/*.jar"
+    ],
+    "java.maven.downloadSources": true,
+    "java.maven.downloadJavadoc": true,
+    "java.debug.settings.hotCodeReplace": "auto",
+    "java.test.config": {
+        "vmargs": [
+            "-Djava.awt.headless=true",
+            "-Dtestfx.robot=awt",
+            "-Dtestfx.headless=true",
+            "-Dprism.order=sw"
+        ]
+    },
+    "files.watcherExclude": {
+        "**/target/**": true,
+        "**/.git/**": true,
+        "**/node_modules/**": true
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "files.associations": {
+        "*.fxml": "xml",
+        "*.css": "css"
+    }
+}

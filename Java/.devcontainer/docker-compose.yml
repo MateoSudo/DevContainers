@@ -1,0 +1,40 @@
+# Docker Compose file for Java Development Container
+# Note: version field is deprecated in modern docker-compose
+
+services:
+  java-dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        USERNAME: vscode
+        USER_UID: 1000
+        USER_GID: 1000
+    container_name: java-dev-container
+    command: sleep infinity
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+      - MAVEN_HOME=/usr/share/maven
+      - JAVAFX_HOME=/opt/javafx-sdk
+      - PATH=/usr/lib/jvm/java-21-openjdk-amd64/bin:/usr/share/maven/bin:/opt/javafx-sdk/bin:${PATH}
+      - DISPLAY=${DISPLAY}
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+      - "5000:5000"
+      - "8000:8000"
+    volumes:
+      - ../..:/workspace:cached
+      - java-maven-cache:/workspace/.m2/repository
+      - java-gradle-cache:/home/vscode/.gradle
+      - vscode-extensions:/home/vscode/.vscode-server/extensions
+      - bash-history:/home/vscode/.bash_history
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    working_dir: /workspace
+    restart: unless-stopped
+
+volumes:
+  java-maven-cache:
+  java-gradle-cache:
+  vscode-extensions:
+  bash-history:

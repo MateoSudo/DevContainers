@@ -138,3 +138,5 @@ dill>=0.3.6,<1.0.0                 # Extended pickling capabilities
 # - Update packages regularly but test compatibility before upgrading major versions
 # 
 # ============================================================================= 
+# Git manipulation
+gitpython>=3.1.31,<4.0.0              # Git repository manipulation
