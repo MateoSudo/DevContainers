@@ -27,6 +27,12 @@ A comprehensive development container for the **T3 Stack** - the best way to sta
 - **Environment validation** with Zod
 - **Bundle analyzer** integration
 
+### 🔄 Repository Synchronization
+- **Gitea-GitHub Sync Scripts** for bidirectional repository synchronization
+- **Node.js Implementation** with native async/await support
+- **Shell Script Version** for universal compatibility
+- **Configuration Management** with JSON-based config files
+
 ## 🛠 Quick Start
 
 ### Option 1: Use This Template
